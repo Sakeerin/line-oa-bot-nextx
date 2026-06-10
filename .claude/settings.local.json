@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"d:\\\\Projects\\\\line-oa-bot\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(ConvertTo-Json)",
+      "PowerShell(Get-ChildItem -Path \"d:\\\\Projects\\\\line-oa-bot\" -Recurse | ForEach-Object { $_.FullName })",
+      "PowerShell(Get-ChildItem -Path \"d:\\\\Projects\\\\line-oa-bot\" -Force | ForEach-Object { $_.FullName + \" | \" + $_.GetType\\(\\).Name })",
+      "PowerShell(Get-ChildItem -Path \"d:\\\\Projects\\\\line-oa-bot\\\\.claude\" -Force -Recurse | ForEach-Object { $_.FullName })",
+      "Bash(npx create-next-app@latest . --typescript --app --no-src-dir --no-tailwind --eslint --import-alias \"@/*\" --yes)",
+      "Bash(node -e \"const g = require\\('@google/genai'\\); console.log\\(Object.keys\\(g\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(node -e \"const g = require\\('@google/genai'\\); const ai = new g.GoogleGenAI\\({apiKey:'x'}\\); console.log\\(typeof ai.models?.generateContent\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(node -e \"const {webhook} = require\\('@line/bot-sdk'\\); console.log\\(Object.keys\\(webhook\\).filter\\(k => k.includes\\('Event'\\) || k.includes\\('Message'\\) || k.includes\\('Webhook'\\)\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const x = require\\('@line/bot-sdk/dist/webhook/model/models.js'\\); console.log\\(Object.keys\\(x\\).filter\\(k => k.includes\\('Message'\\) || k.includes\\('Callback'\\) || k.includes\\('Request'\\)\\).join\\('\\\\n'\\)\\)\")",
+      "Bash(node -e \"const sdk = require\\('@line/bot-sdk'\\); const keys = Object.keys\\(sdk\\); const matching = keys.filter\\(k => k.includes\\('Message'\\) || k.includes\\('Callback'\\) || k.includes\\('webhook'\\) || k.includes\\('Webhook'\\)\\); console.log\\(matching.join\\('\\\\n'\\)\\)\")",
+      "Bash(node -e \"const p = require\\('@line/bot-sdk/package.json'\\); console.log\\(JSON.stringify\\(p.exports, null, 2\\)\\)\")"
+    ]
+  }
+}
