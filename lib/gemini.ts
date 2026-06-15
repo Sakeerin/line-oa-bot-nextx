@@ -21,13 +21,21 @@ export async function askGemini(
   const controller = new AbortController();
   const t = setTimeout(() => controller.abort(), 8000);
 
+  const bangkokNow = new Date().toLocaleString("th-TH", {
+    timeZone: "Asia/Bangkok",
+    dateStyle: "full",
+    timeStyle: "short",
+  });
+
   try {
     const res = await ai.models.generateContent({
       model: "gemini-3.5-flash",
       contents: buildPrompt(faq, question),
       config: {
-        systemInstruction: SYSTEM_PROMPT,
-        temperature: 1.0,
+        systemInstruction:
+          SYSTEM_PROMPT +
+          `\n\n<current_time>\n${bangkokNow}\n</current_time>`,
+        temperature: 0.3,
         maxOutputTokens: 1024,
         thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
         abortSignal: controller.signal,
