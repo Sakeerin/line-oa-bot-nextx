@@ -1,12 +1,11 @@
 # บรีฟสำหรับ Claude Code — VBNEXTX LINE Bot (Gemini AI)
 
 > เป้าหมาย: LINE bot ตอบลูกค้าธุรกิจ **นายหน้าอสังหาริมทรัพย์ครบวงจร** ในนาม **"ทีมดูแลลูกค้าของ VBNEXTX"**
-> โดยอ่านข้อมูลจาก FAQ (Google Sheet) แล้วตอบด้วยภาษาธรรมชาติผ่าน Gemini 3.5 Flash
+> โดยอ่านข้อมูลจาก FAQ (Google Sheet) แล้วตอบด้วยภาษาธรรมชาติผ่าน Gemini 3.7 Flash
 
-## ข้อมูลที่ยืนยันแล้ว (เช็ก ณ มิ.ย. 2026)
-- `gemini-3.5-flash` มีจริง · GA วันที่ 19 พ.ค. 2026 · ใช้ผ่าน Gemini API ได้
-- Context window 1M tokens · max output 65,536 tokens (เราใช้แค่ 1024 พอ)
-- **thinking default = medium** → เราตั้งเป็น `low` สำหรับงาน FAQ เพื่อประหยัด token + ตอบไว
+## ข้อมูลที่ยืนยันแล้ว (เช็ก ณ ส.ค. 2026)
+- `gemini-3.7-flash` GA แล้ว · context 1,048,576 tokens · max output 65,536 tokens (เราใช้แค่ 1024 พอ) · ราคาโปร $0.75/$3.75 ต่อ 1M tokens ถึง 31 ธ.ค. 2026 (หลังจากนั้น $1.50/$7.50)
+- thinking รองรับ `low` / `medium` / `high` (ระดับ `minimal` จะ error) → เราตั้งเป็น `low` สำหรับงาน FAQ เพื่อประหยัด token + ตอบไว
 - usageMetadata มี field: `thoughtsTokenCount`, `candidatesTokenCount`, และ `finishReason` อยู่ที่ `candidates[0].finishReason`
 
 > ⚠️ SDK `@google/genai` อัปเดตบ่อย — ตอน implement ให้เช็กชื่อ param ของ thinking config (`thinkingLevel` vs `thinkingConfig.thinkingBudget`) กับ docs เวอร์ชันที่ติดตั้งจริงอีกที
@@ -146,7 +145,7 @@ const controller = new AbortController();
 const t = setTimeout(() => controller.abort(), 8000);
 try {
   const res = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.7-flash",
     contents: prompt,
     config: {
       systemInstruction: SYSTEM_PROMPT,
